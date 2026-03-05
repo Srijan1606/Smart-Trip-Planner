@@ -1,5 +1,6 @@
 import { defineConfig, transformWithEsbuild } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 function frontedJsAsJsx() {
   return {
@@ -18,12 +19,17 @@ function frontedJsAsJsx() {
 }
 
 export default defineConfig({
+  root: '.',
+  publicDir: 'public',
   plugins: [
     frontedJsAsJsx(),
     react({
       include: /\.[jt]sx?$/,
     }),
   ],
+  server: {
+    port: 5173,
+  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {
